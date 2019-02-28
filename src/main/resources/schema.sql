@@ -11,8 +11,6 @@ CREATE TABLE IF NOT EXISTS currencies_days(
   aver_day NUMERIC
 );
 
-/*INSERT INTO "currencies" VALUES(1, 100, 'BTC/USD');
-INSERT INTO "currencies_days" VALUES(1, CURRENT_TIMESTAMP, 100);*/
 
 
 CREATE TABLE IF NOT EXISTS users (
@@ -30,7 +28,7 @@ COMMENT ON COLUMN users.name IS 'Username';
 COMMENT ON COLUMN users.password_hash IS 'User''s password hash';
 COMMENT ON COLUMN users.password_salt IS 'A salt to calculate a password hash';
 
-CREATE SEQUENCE IF NOT EXIST user_id_sequence START WITH 1 MINVALUE 1 INCREMENT BY 1;
+CREATE SEQUENCE IF NOT EXISTS user_id_sequence START WITH 1 MINVALUE 1 INCREMENT BY 1;
 COMMENT ON SEQUENCE user_id_sequence IS 'Sequence for ID of table ''users''';
 
 
