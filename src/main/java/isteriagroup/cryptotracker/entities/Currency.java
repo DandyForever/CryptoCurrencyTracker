@@ -41,6 +41,6 @@ public class Currency {
             mappedBy = "currencies")
     @Getter
     @Setter
-    private Subscribtion subscription;
+    private Subscription subscription;
 
 }
