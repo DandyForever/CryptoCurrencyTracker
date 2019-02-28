@@ -7,8 +7,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.List;
-
 
 @Entity
 @Table(name = "CURRENCIES")
@@ -41,6 +39,6 @@ public class Currency {
             mappedBy = "currencies")
     @Getter
     @Setter
-    private Subscribtion subscription;
+    private Subscription subscription;
 
 }
