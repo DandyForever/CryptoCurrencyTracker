@@ -34,7 +34,12 @@ public class Currency {
     @Getter
     @Setter
     private BigDecimal curr_val;
-
+    
+    @Column(name = "LAST_CHANGE")
+    @Getter
+    @Setter
+    private BigDecimal last_change;
+    
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "currencies")
