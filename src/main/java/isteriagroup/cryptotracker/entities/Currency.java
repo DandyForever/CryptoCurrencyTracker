@@ -36,11 +36,11 @@ public class Currency {
     @Setter
     private BigDecimal curr_val;
 
-    @ManyToMany(fetch = FetchType.LAZY,
+    @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "currencies")
     @Getter
     @Setter
-    private List<Subscribtion> subscription;
+    private Subscribtion subscription;
 
 }
