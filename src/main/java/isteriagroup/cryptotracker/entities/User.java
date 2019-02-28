@@ -50,9 +50,4 @@ public class User {
     @Getter
     @Setter
     private List<Currency> currencies;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    @Getter
-    @Setter
-    private List<Float> userVal;
 }
