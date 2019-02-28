@@ -41,6 +41,6 @@ public class Currency {
             mappedBy = "currencies")
     @Getter
     @Setter
-    private List<Subscribe> orders;
+    private List<Subscribtion> subscription;
 
 }
