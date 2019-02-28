@@ -34,7 +34,7 @@ public class Currency {
     @Column(name = "CURR_VAL")
     @Getter
     @Setter
-    private BigDecimal price;
+    private BigDecimal curr_val;
 
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
