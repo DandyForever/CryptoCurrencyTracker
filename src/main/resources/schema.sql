@@ -1,8 +1,15 @@
 CREATE TABLE IF NOT EXISTS currencies(
   id BIGINT PRIMARY KEY,
   curr_val NUMERIC NOT NULL,
+  last_change NUMERIC NOT NULL,
   name VARCHAR(100) NOT NULL
 );
+
+COMMENT ON TABLE currencies IS 'Table contains the currencies'' data';
+COMMENT ON COLUMN currencies.id IS 'Currency ID';
+COMMENT ON COLUMN currencies.curr_val IS 'Course in USD up to day';
+COMMENT ON COLUMN currencies.last_change IS 'Last course change in USD';
+COMMENT ON COLUMN currencies.name IS 'CurrencyName';
 
 CREATE TABLE IF NOT EXISTS currencies_days(
   currency_id BIGINT REFERENCES currencies(id),
@@ -11,7 +18,10 @@ CREATE TABLE IF NOT EXISTS currencies_days(
   aver_day NUMERIC
 );
 
-
+COMMENT ON TABLE currencies_days IS 'Linkage table between  ''users'' and datetime ';
+COMMENT ON COLUMN currencies_days.curr_date IS 'CurrentDate';
+COMMENT ON COLUMN currencies_days.currency_id IS 'Currency ID';
+COMMENT ON COLUMN currencies_days.aver_day IS 'Average course in USD up to day';
 
 CREATE TABLE IF NOT EXISTS users (
   id BIGINT PRIMARY KEY,
