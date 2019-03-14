@@ -12,10 +12,6 @@ public class SubscribtionDto {
 
     @Getter
     @Setter
-    private Long id;
-
-    @Getter
-    @Setter
     private Long userId;
 
     @Getter
@@ -26,8 +22,11 @@ public class SubscribtionDto {
     @Setter
     private CurrencyDto currency;
 
-    public SubscribtionDto(Long id, Long userId, Float userVal, CurrencyDto currency) {
-        this.id = id;
+    @Getter
+    @Setter
+    private Long currencyId;
+
+    public SubscribtionDto(Long userId, Float userVal, CurrencyDto currency) {
         this.userId = userId;
         this.userVal = userVal;
         this.currency = currency;

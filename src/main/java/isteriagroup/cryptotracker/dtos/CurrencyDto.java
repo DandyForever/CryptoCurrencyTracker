@@ -1,6 +1,7 @@
 package isteriagroup.cryptotracker.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import isteriagroup.cryptotracker.entities.Currency;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
+@EqualsAndHashCode
 @ToString
 public class CurrencyDto {
 
@@ -34,5 +36,16 @@ public class CurrencyDto {
         this.name = name;
         this.curr_val = curr_val;
         this.last_change = last_change;
+    }
+
+    public static CurrencyDto buildCurrencyDtoFromCurrency(Currency currency){
+
+        CurrencyDto currencyDto = new CurrencyDto();
+        currencyDto.setId(currency.getId());
+        currencyDto.setName(currency.getName());
+        currencyDto.setCurr_val(currency.getCurr_val());
+        currencyDto.setLast_change(currency.getLast_change());
+
+        return currencyDto;
     }
 }
