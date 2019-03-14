@@ -37,7 +37,7 @@ public class SubscriptionService {
    private SubscribtionDto buildSubscribtionDtoFromSubscription(Subscription subscription){
         return new SubscribtionDto(subscription.getUserId(),
                 subscription.getUserVal(),
-                buildCurrencyDtoFromCurrency(subscription.getCurrency()));
+                subscription.getCurrencyId());
 
    }
 
