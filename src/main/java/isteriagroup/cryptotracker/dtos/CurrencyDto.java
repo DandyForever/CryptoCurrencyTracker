@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
+@EqualsAndHashCode
 @ToString
 public class CurrencyDto {
 
