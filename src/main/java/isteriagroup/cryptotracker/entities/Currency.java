@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-
 @Entity
 @Table(name = "CURRENCIES")
 @ToString(exclude = "currencies")
@@ -35,16 +34,11 @@ public class Currency {
     @Setter
     private BigDecimal curr_val;
 
-    @Column(name = "LAST_CHANGE")
-    @Getter
-    @Setter
-    private BigDecimal last_change;
-
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
             mappedBy = "currencies")
     @Getter
     @Setter
-    private Subscription subscriptions;
+    private Subscription subscription;
 
 }
