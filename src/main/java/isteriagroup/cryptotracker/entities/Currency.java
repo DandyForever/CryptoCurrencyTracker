@@ -1,17 +1,20 @@
 package isteriagroup.cryptotracker.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.List;
 
 
 @Entity
 @Table(name = "CURRENCIES")
 @ToString(exclude = "currencies")
+@NoArgsConstructor
 public class Currency {
 
     @Id
@@ -45,6 +48,14 @@ public class Currency {
             mappedBy = "currencies")
     @Getter
     @Setter
-    private Subscription subscriptions;
+    private List<Subscription> subscriptions;
+
+
+    public Currency(String name, BigDecimal curr_val, BigDecimal last_change, List<Subscription> subscriptions) {
+        this.name = name;
+        this.curr_val = curr_val;
+        this.last_change = last_change;
+        this.subscriptions = subscriptions;
+    }
 
 }

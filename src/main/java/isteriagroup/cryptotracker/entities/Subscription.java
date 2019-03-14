@@ -1,6 +1,7 @@
 package isteriagroup.cryptotracker.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "USERS_SUBSCRIPTIONS")
 @ToString
+@NoArgsConstructor
 public class Subscription {
 
     @Column(name = "USER_VAL")
@@ -40,5 +42,11 @@ public class Subscription {
     @Getter
     @Setter
     private Currency currency;
+
+    public Subscription(Float userVal, Long userId, Long currencyId) {
+        this.userVal = userVal;
+        this.userId = userId;
+        this.currencyId = currencyId;
+    }
 
 }

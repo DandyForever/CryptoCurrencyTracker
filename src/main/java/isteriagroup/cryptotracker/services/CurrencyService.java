@@ -6,6 +6,8 @@ import isteriagroup.cryptotracker.dtos.CurrencyDto;
 import isteriagroup.cryptotracker.entities.Currency;
 import org.springframework.stereotype.Service;
 
+import static isteriagroup.cryptotracker.dtos.CurrencyDto.buildCurrencyDtoFromCurrency;
+
 
 @Service
 public class CurrencyService {
@@ -20,14 +22,5 @@ public class CurrencyService {
         return buildCurrencyDtoFromCurrency(currency);
     }
 
-    private CurrencyDto buildCurrencyDtoFromCurrency(Currency currency){
 
-        CurrencyDto currencyDto = new CurrencyDto();
-        currencyDto.setId(currency.getId());
-        currencyDto.setName(currency.getName());
-        currencyDto.setCurr_val(currency.getCurr_val());
-        currencyDto.setLast_change(currency.getLast_change());
-
-        return currencyDto;
-    }
 }
