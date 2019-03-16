@@ -13,8 +13,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "CURRENCIES")
-@ToString(exclude = "currencies")
 @NoArgsConstructor
+@ToString(exclude = "currencies")
 public class Currency {
 
     @Id
@@ -50,12 +50,10 @@ public class Currency {
     @Setter
     private List<Subscription> subscriptions;
 
-
     public Currency(String name, BigDecimal curr_val, BigDecimal last_change, List<Subscription> subscriptions) {
         this.name = name;
         this.curr_val = curr_val;
         this.last_change = last_change;
         this.subscriptions = subscriptions;
     }
-
 }

@@ -62,7 +62,8 @@ public class CurrencyServiceTest {
         List <SubscriptionDto> subscriptionDtos = new ArrayList<>();
         subscriptionDtos.add(subscriptionDto1);
         subscriptionDtos.add(subscriptionDto2);
-        CurrencyDto expectedCurrencyDto = new CurrencyDto(1L, "Bitcoin", new BigDecimal(100), new BigDecimal(5));
+        CurrencyDto expectedCurrencyDto = new CurrencyDto(1L, "Bitcoin",
+                                        new BigDecimal(100), new BigDecimal(5), subscriptionDtos);
 
         assertThat(actualCurrencyDto).isEqualTo(expectedCurrencyDto);
     }
