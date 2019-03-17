@@ -2,7 +2,6 @@ package isteriagroup.cryptotracker.service;
 
 import isteriagroup.cryptotracker.common.utils.ValidationException;
 import isteriagroup.cryptotracker.daos.CurrencyDao;
-import isteriagroup.cryptotracker.daos.SubscriptionDao;
 import isteriagroup.cryptotracker.dtos.CurrencyDto;
 import isteriagroup.cryptotracker.dtos.SubscriptionDto;
 import isteriagroup.cryptotracker.entities.Currency;
