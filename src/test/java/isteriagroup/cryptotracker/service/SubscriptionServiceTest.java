@@ -3,6 +3,9 @@ package isteriagroup.cryptotracker.service;
 
 import isteriagroup.cryptotracker.common.utils.ValidationException;
 import isteriagroup.cryptotracker.daos.SubscriptionDao;
+import isteriagroup.cryptotracker.dtos.SubscriptionDto;
+import isteriagroup.cryptotracker.entities.Subscription;
+import isteriagroup.cryptotracker.entities.SubscriptionPK;
 import isteriagroup.cryptotracker.services.SubscriptionService;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
@@ -28,10 +32,41 @@ public class SubscriptionServiceTest {
         this.subscriptionService = new SubscriptionService(subscriptionDao);
     }
 
-    /*@Test(expected = ValidationException.class)
+    @Test(expected = ValidationException.class)
     public void wrongIdGetTest() throws ValidationException{
-        given(subscriptionDao.findOne(1L)).willReturn(null);
-        subscriptionService.get(1L);
-    }*/
+        given(subscriptionDao.findOne(new SubscriptionPK(1L, 1L))).willReturn(null);
+        subscriptionService.get(new SubscriptionPK(1L, 1L));
+    }
 
+    @Test
+    public void getTest() throws ValidationException{
+        Subscription subscription = new Subscription((float) 10, 1L, 1L);
+        given(subscriptionDao.findOne(new SubscriptionPK(1L, 1L))).willReturn(subscription);
+
+        SubscriptionDto actualSubscriptionDto = subscriptionService.get(new SubscriptionPK(1L, 1L));
+        SubscriptionDto expectedSubscriptionDto = new SubscriptionDto(1L, (float) 10, 1L);
+
+        assertThat(actualSubscriptionDto).isEqualTo(expectedSubscriptionDto);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void nullCreateTest() throws ValidationException {
+        subscriptionService.create(null);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void nullIdCreateTest() throws ValidationException{
+        subscriptionService.create(new SubscriptionDto(null, (float)10, null));
+    }
+
+    @Test
+    public void сreateTest() throws ValidationException{
+        SubscriptionDto subscriptionDto = new SubscriptionDto(1L, (float)10, 1L);
+
+        Subscription actualSubscription = subscriptionService.create(subscriptionDto);
+
+        Subscription expectedSubscription = new Subscription((float) 10, 1L,1L);
+
+        assertThat(actualSubscription).isEqualTo(expectedSubscription);
+    }
 }
