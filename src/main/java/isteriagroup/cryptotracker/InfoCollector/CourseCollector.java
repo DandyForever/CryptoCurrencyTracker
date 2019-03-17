@@ -1,20 +1,19 @@
 package isteriagroup.cryptotracker.InfoCollector;
 
-import isteriagroup.cryptotracker.daos.CurrencyDao;
-import isteriagroup.cryptotracker.entities.Currency;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.math.BigDecimal;
 import java.net.*;
 import java.io.*;
 import java.util.Stack;
 
+public class CourseCollector{
 
-
-//@Component
-public class CourseCollector implements CommandLineRunner {
+    private static String changes[];
+    private static String values[];
+    private static String dataNames[] = {"EDO/USD", "ETP/USD", "AVT/USD", "ZEC/USD",
+        "QTM/USD", "OMG/USD", "EOS/USD",
+                "ETC/USD", "XMR/USD", "LTC/USD",
+                "BTG/USD", "DSH/USD", "IOT/USD",
+                "XRP/USD", "NEO/USD", "ETH/USD", "BTC/USD"};
 
     private static void parseHtmlDoc(int dataNamesSize, Stack<String> dataVal){
 
@@ -78,17 +77,6 @@ public class CourseCollector implements CommandLineRunner {
     }
 
 
-    private  CurrencyDao currencyDao;
-
-
-    @PostConstruct
-    public void initCurrencies(String changes[], String values[], String dataNames[]){
-        currencyDao.save(new Currency(dataNames[0],
-                new BigDecimal(values[0]),
-                new BigDecimal(changes[0])));
-
-    }
-
     private static void replaceCommaByDot(String mass[]){
         int i = 0;
         int size = mass.length;
@@ -99,20 +87,13 @@ public class CourseCollector implements CommandLineRunner {
         }
     }
 
-    public void run(String... strings) throws Exception{
-
-        String dataNames[] = {"BTC/USD", "ETH/USD", "NEO/USD", "XRP/USD",
-                "IOT/USD", "DSH/USD", "BTG/USD",
-                "LTC/USD", "XMR/USD", "ETC/USD",
-                "EOS/USD", "OMG/USD", "QTM/USD",
-                "ZEC/USD", "AVT/USD", "ETP/USD", "EDO/USD"};
-
+    public static void runCollector(){
         Stack<String> dataVal = new Stack<>();
 
         int dataNamesSize = dataNames.length;
 
-        String changes[] = new String[dataNamesSize];
-        String values[] = new String[dataNamesSize];
+        changes = new String[dataNamesSize];
+        values = new String[dataNamesSize];
 
         parseHtmlDoc(dataNamesSize, dataVal);
         fillMass(changes, values, dataVal);
@@ -120,11 +101,18 @@ public class CourseCollector implements CommandLineRunner {
         replaceCommaByDot(changes);
         replaceCommaByDot(values);
 
-        printGottenData(dataNamesSize, changes, values, dataNames);
+        //printGottenData(dataNamesSize, changes, values, dataNames);
+    }
 
-        initCurrencies(changes, values, dataNames);
-        /*BigDecimal num = new BigDecimal(changes[1]);
-        System.out.println(num);*/
+    public static String[] getChanges() {
+        return changes;
+    }
 
+    public static String[] getValues() {
+        return values;
+    }
+
+    public static String[] getDataNames() {
+        return dataNames;
     }
 }
