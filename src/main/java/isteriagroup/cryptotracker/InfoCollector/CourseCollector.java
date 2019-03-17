@@ -13,7 +13,7 @@ import java.util.Stack;
 
 
 
-@Component
+//@Component
 public class CourseCollector implements CommandLineRunner {
 
     private static void parseHtmlDoc(int dataNamesSize, Stack<String> dataVal){
