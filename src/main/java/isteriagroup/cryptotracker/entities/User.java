@@ -1,8 +1,7 @@
 package isteriagroup.cryptotracker.entities;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "USERS")
 @ToString
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -49,9 +49,11 @@ public class User {
     @Setter
     private List<Subscription> subscriptions;
 
-    public User(String email, String name, List<Subscription> subscriptions) {
+    public User(String email, String name, String passwordHash, String passwordSalt, List<Subscription> subscriptions) {
         this.email = email;
         this.name = name;
+        this.passwordHash = passwordHash;
+        this.passwordSalt = passwordSalt;
         this.subscriptions = subscriptions;
     }
 }

@@ -13,8 +13,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "CURRENCIES")
-@NoArgsConstructor
 @ToString(exclude = "currencies")
+@NoArgsConstructor
 public class Currency {
 
     @Id
@@ -45,10 +45,11 @@ public class Currency {
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
-            mappedBy = "currencies")
+            mappedBy = "currency")
     @Getter
     @Setter
     private List<Subscription> subscriptions;
+
 
     public Currency(String name, BigDecimal curr_val, BigDecimal last_change, List<Subscription> subscriptions) {
         this.name = name;
@@ -56,4 +57,11 @@ public class Currency {
         this.last_change = last_change;
         this.subscriptions = subscriptions;
     }
+
+    public Currency(String name, BigDecimal curr_val, BigDecimal last_change) {
+        this.name = name;
+        this.curr_val = curr_val;
+        this.last_change = last_change;
+    }
+
 }

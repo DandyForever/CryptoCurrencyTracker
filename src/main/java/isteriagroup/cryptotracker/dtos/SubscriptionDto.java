@@ -20,6 +20,10 @@ public class SubscriptionDto {
 
     @Getter
     @Setter
+    private CurrencyDto currencyDto;
+
+    @Getter
+    @Setter
     private Long currencyId;
 
     public SubscriptionDto(Long userId, Float userVal, Long currencyId) {
