@@ -26,7 +26,7 @@ public class SubscriptionService {
     private final SubscriptionDao subscriptionDao;
 
     public SubscriptionDto get(SubscriptionPK subscriptionPK) throws ValidationException {
-        validateIsNotNull(subscriptionPK, "No subscriptionPK is provided");
+        validateIsNotNull(subscriptionPK, "No subsription is provided");
 
         Subscription subscription = subscriptionDao.findOne(subscriptionPK);
         validateIsNotNull(subscription, "No subscription with id" + subscriptionPK);
@@ -34,23 +34,24 @@ public class SubscriptionService {
         return buildSubscriptionDtoFromSubscription(subscription);
     }
 
-    private SubscriptionDto buildSubscriptionDtoFromSubscription(Subscription subscription){
+   private SubscriptionDto buildSubscriptionDtoFromSubscription(Subscription subscription){
         return new SubscriptionDto(subscription.getUserId(),
                 subscription.getUserVal(),
                 subscription.getCurrencyId());
 
-    }
+   }
 
-    public Subscription create(SubscriptionDto subscriptionDto) throws ValidationException{
+   public Subscription create(SubscriptionDto subscriptionDto) throws ValidationException{
         validateIsNotNull(subscriptionDto, "No subscription is provided");
         validateIsNull(subscriptionDto.getUserId(), "No user specified for the subscription");
 
-        Subscription subscription = buildSubsriptionFromSubscribtionDto(subscriptionDto);
+        Subscription subscription = buildSubsriptionFromSubscriptionDto(subscriptionDto);
         subscriptionDao.save(subscription);
-        return subscription;
-    }
 
-    private Subscription buildSubsriptionFromSubscribtionDto(SubscriptionDto subscriptionDto) {
+        return subscription;
+   }
+
+    private Subscription buildSubsriptionFromSubscriptionDto(SubscriptionDto subscriptionDto) {
         Subscription subscription = new Subscription();
         subscription.setCurrencyId(subscriptionDto.getCurrencyId());
         subscription.setUserId(subscriptionDto.getUserId());
