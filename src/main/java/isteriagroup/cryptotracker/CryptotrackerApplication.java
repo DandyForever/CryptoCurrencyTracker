@@ -28,15 +28,21 @@ public class CryptotrackerApplication {
         String changes[] = CourseCollector.getChanges();
         String values[] = CourseCollector.getValues();
         String dataNames[] = CourseCollector.getDataNames();
-
         int quantityCurrency = changes.length;
+
+        Currency currencies[] = new Currency[quantityCurrency];
+        int iter = 0;
+        for (iter = 0; iter < quantityCurrency; iter++){
+            currencies[iter] = new Currency((long) iter, dataNames[iter], new BigDecimal(values[iter]), new BigDecimal(changes[iter]));
+        }
+
 
         return args -> {
             currencyDao.deleteAll();
 
-            int i = 0;
+            int i;
             for (i = 0; i < quantityCurrency; i++){
-                currencyDao.save(new Currency(dataNames[i], new BigDecimal(values[i]), new BigDecimal(changes[i])));
+                currencyDao.save(currencies[i]);
             }
 
             System.out.println("--------------------------------------------------------------------------------");
