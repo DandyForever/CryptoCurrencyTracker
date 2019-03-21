@@ -3,9 +3,7 @@ package isteriagroup.cryptotracker.services;
 
 import isteriagroup.cryptotracker.common.utils.ValidationException;
 import isteriagroup.cryptotracker.daos.SubscriptionDao;
-import isteriagroup.cryptotracker.dtos.CurrencyDto;
 import isteriagroup.cryptotracker.dtos.SubscriptionDto;
-import isteriagroup.cryptotracker.entities.Currency;
 import isteriagroup.cryptotracker.entities.Subscription;
 import isteriagroup.cryptotracker.entities.SubscriptionPK;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +24,7 @@ public class SubscriptionService {
     private final SubscriptionDao subscriptionDao;
 
     public SubscriptionDto get(SubscriptionPK subscriptionPK) throws ValidationException {
-        validateIsNotNull(subscriptionPK, "No subsription is provided");
+        validateIsNotNull(subscriptionPK, "No subscription is provided");
 
         Subscription subscription = subscriptionDao.findOne(subscriptionPK);
         validateIsNotNull(subscription, "No subscription with id" + subscriptionPK);
@@ -35,26 +33,24 @@ public class SubscriptionService {
     }
 
    private SubscriptionDto buildSubscriptionDtoFromSubscription(Subscription subscription){
-        return new SubscriptionDto(subscription.getUserId(),
-                subscription.getUserVal(),
-                subscription.getCurrencyId());
+        return new SubscriptionDto(subscription.getSubscriptionPK(),
+                subscription.getUserVal());
 
    }
 
    public Subscription create(SubscriptionDto subscriptionDto) throws ValidationException{
         validateIsNotNull(subscriptionDto, "No subscription is provided");
-        validateIsNull(subscriptionDto.getUserId(), "No user specified for the subscription");
+        validateIsNull(subscriptionDto.getSubscriptionPK(), "No PK specified for the subscription");
 
-        Subscription subscription = buildSubsriptionFromSubscriptionDto(subscriptionDto);
+        Subscription subscription = buildSubscriptionFromSubscriptionDto(subscriptionDto);
         subscriptionDao.save(subscription);
 
         return subscription;
    }
 
-    private Subscription buildSubsriptionFromSubscriptionDto(SubscriptionDto subscriptionDto) {
+    private Subscription buildSubscriptionFromSubscriptionDto(SubscriptionDto subscriptionDto) {
         Subscription subscription = new Subscription();
-        subscription.setCurrencyId(subscriptionDto.getCurrencyId());
-        subscription.setUserId(subscriptionDto.getUserId());
+        subscription.setSubscriptionPK(subscriptionDto.getSubscriptionPK());
         subscription.setUserVal(subscriptionDto.getUserVal());
 
         return subscription;
