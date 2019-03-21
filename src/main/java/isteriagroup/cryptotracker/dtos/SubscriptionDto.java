@@ -1,6 +1,7 @@
 package isteriagroup.cryptotracker.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import isteriagroup.cryptotracker.entities.SubscriptionPK;
 import lombok.*;
 
 
@@ -12,7 +13,7 @@ public class SubscriptionDto {
 
     @Getter
     @Setter
-    private Long userId;
+    private SubscriptionPK subscriptionPK;
 
     @Getter
     @Setter
@@ -22,13 +23,8 @@ public class SubscriptionDto {
     @Setter
     private CurrencyDto currencyDto;
 
-    @Getter
-    @Setter
-    private Long currencyId;
-
-    public SubscriptionDto(Long userId, Float userVal, Long currencyId) {
-        this.userId = userId;
+    public SubscriptionDto(SubscriptionPK subscriptionPK, Float userVal) {
+        this.subscriptionPK = subscriptionPK;
         this.userVal = userVal;
-        this.currencyId = currencyId;
     }
 }
