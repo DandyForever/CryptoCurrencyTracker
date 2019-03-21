@@ -21,10 +21,6 @@ public class Currency {
     @Column(name = "id")
     @Getter
     @Setter
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "currency_seq_gen")
-    @SequenceGenerator(name = "currency_seq_gen",
-            sequenceName = "user_id_sequence", allocationSize = 1)
     private Long id;
 
     @Column(name = "NAME")
@@ -58,7 +54,8 @@ public class Currency {
         this.subscriptions = subscriptions;
     }
 
-    public Currency(String name, BigDecimal curr_val, BigDecimal last_change) {
+    public Currency(Long id, String name, BigDecimal curr_val, BigDecimal last_change) {
+        this.id = id;
         this.name = name;
         this.curr_val = curr_val;
         this.last_change = last_change;
