@@ -40,11 +40,11 @@ public class SubscriptionServiceTest {
 
     @Test
     public void getTest() throws ValidationException{
-        Subscription subscription = new Subscription((float) 10, 1L, 1L);
+        Subscription subscription = new Subscription(new SubscriptionPK((long) 1, (long) 1), (float) 1);
         given(subscriptionDao.findOne(new SubscriptionPK(1L, 1L))).willReturn(subscription);
 
         SubscriptionDto actualSubscriptionDto = subscriptionService.get(new SubscriptionPK(1L, 1L));
-        SubscriptionDto expectedSubscriptionDto = new SubscriptionDto(1L, (float) 10, 1L);
+        SubscriptionDto expectedSubscriptionDto = new SubscriptionDto(new SubscriptionPK((long) 1, (long) 1), (float) 1);
 
         assertThat(actualSubscriptionDto).isEqualTo(expectedSubscriptionDto);
     }
@@ -56,16 +56,16 @@ public class SubscriptionServiceTest {
 
     @Test(expected = ValidationException.class)
     public void nullIdCreateTest() throws ValidationException{
-        subscriptionService.create(new SubscriptionDto(null, (float)10, null));
+        subscriptionService.create(new SubscriptionDto(new SubscriptionPK((long) 1, (long) 1), (float) 1));
     }
 
     @Test
     public void сreateTest() throws ValidationException{
-        SubscriptionDto subscriptionDto = new SubscriptionDto(1L, (float)10, 1L);
+        SubscriptionDto subscriptionDto = new SubscriptionDto(new SubscriptionPK((long) 1, (long) 1), (float) 1);
 
         Subscription actualSubscription = subscriptionService.create(subscriptionDto);
 
-        Subscription expectedSubscription = new Subscription((float) 10, 1L,1L);
+        Subscription expectedSubscription = new Subscription(new SubscriptionPK((long) 1, (long) 1), (float) 1);
 
         assertThat(actualSubscription).isEqualTo(expectedSubscription);
     }
