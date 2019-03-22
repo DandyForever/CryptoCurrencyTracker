@@ -1,23 +1,25 @@
 package isteriagroup.cryptotracker.controllers;
 
-
-import isteriagroup.cryptotracker.daos.CurrencyDao;
-import isteriagroup.cryptotracker.entities.Currency;
+import isteriagroup.cryptotracker.dtos.CurrencyDto;
+import isteriagroup.cryptotracker.services.CurrencyService;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("currency")
+@RequestMapping("/currency")
 public class CurrencyController {
-    private CurrencyDao currencyDao;
 
-    public CurrencyController(CurrencyDao currencyDao){
-        this.currencyDao = currencyDao;
+    private CurrencyService currencyService;
+
+    public CurrencyController(CurrencyService currencyService) {
+        this.currencyService = currencyService;
     }
 
-    @GetMapping("/all")
-    public Iterable<Currency> all(){
-        return this.currencyDao.findAll();
+    @GetMapping("/{currencyId}")
+    public CurrencyDto getCurrency(@PathVariable Long currencyId){
+        return currencyService.getCurrency(currencyId);
     }
+
 }
