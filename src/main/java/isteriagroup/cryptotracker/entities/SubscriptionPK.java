@@ -28,4 +28,7 @@ public class SubscriptionPK implements Serializable {
         this.userId = userId;
         this.currencyId = currencyId;
     }
+    
+    public SubscriptionPK() {
+    }
 }
