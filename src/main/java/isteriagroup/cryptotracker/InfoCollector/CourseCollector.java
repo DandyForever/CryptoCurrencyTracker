@@ -101,7 +101,6 @@ public class CourseCollector{
         replaceCommaByDot(changes);
         replaceCommaByDot(values);
 
-        //printGottenData(dataNamesSize, changes, values, dataNames);
     }
 
     public static String[] getChanges() {
