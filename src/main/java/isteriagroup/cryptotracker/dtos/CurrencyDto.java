@@ -22,17 +22,17 @@ public class CurrencyDto {
 
     @Getter
     @Setter
-    private BigDecimal curr_val;
+    private BigDecimal currVal;
 
     @Getter
     @Setter
-    private BigDecimal last_change;
+    private BigDecimal lastChange;
 
-    public CurrencyDto(Long id, String name, BigDecimal curr_val, BigDecimal last_change) {
+    public CurrencyDto(Long id, String name, BigDecimal currVal, BigDecimal lastChange) {
         this.id = id;
         this.name = name;
-        this.curr_val = curr_val;
-        this.last_change = last_change;
+        this.currVal = currVal;
+        this.lastChange = lastChange;
     }
 
     public static CurrencyDto buildCurrencyDtoFromCurrency(Currency currency){
@@ -40,8 +40,8 @@ public class CurrencyDto {
         CurrencyDto currencyDto = new CurrencyDto();
         currencyDto.setId(currency.getId());
         currencyDto.setName(currency.getName());
-        currencyDto.setCurr_val(currency.getCurr_val());
-        currencyDto.setLast_change(currency.getLast_change());
+        currencyDto.setCurrVal(currency.getCurr_val());
+        currencyDto.setLastChange(currency.getLast_change());
 
         return currencyDto;
     }

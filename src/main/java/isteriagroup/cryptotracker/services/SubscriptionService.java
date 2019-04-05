@@ -32,21 +32,21 @@ public class SubscriptionService {
         return buildSubscriptionDtoFromSubscription(subscription);
     }
 
-   private SubscriptionDto buildSubscriptionDtoFromSubscription(Subscription subscription){
+    private SubscriptionDto buildSubscriptionDtoFromSubscription(Subscription subscription){
         return new SubscriptionDto(subscription.getSubscriptionPK(),
                 subscription.getUserVal());
 
-   }
+    }
 
-   public Subscription create(SubscriptionDto subscriptionDto) throws ValidationException{
+    public Subscription create(SubscriptionDto subscriptionDto) throws ValidationException{
         validateIsNotNull(subscriptionDto, "No subscription is provided");
-        validateIsNull(subscriptionDto.getSubscriptionPK(), "No PK specified for the subscription");
+        validateIsNotNull(subscriptionDto.getSubscriptionPK(), "No PK specified for the subscription");
 
         Subscription subscription = buildSubscriptionFromSubscriptionDto(subscriptionDto);
         subscriptionDao.save(subscription);
 
         return subscription;
-   }
+    }
 
     private Subscription buildSubscriptionFromSubscriptionDto(SubscriptionDto subscriptionDto) {
         Subscription subscription = new Subscription();

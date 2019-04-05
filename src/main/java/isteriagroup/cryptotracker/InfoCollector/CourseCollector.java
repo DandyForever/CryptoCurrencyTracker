@@ -10,10 +10,10 @@ public class CourseCollector{
     private static String changes[];
     private static String values[];
     private static String dataNames[] = {"EDO/USD", "ETP/USD", "AVT/USD", "ZEC/USD",
-        "QTM/USD", "OMG/USD", "EOS/USD",
-                "ETC/USD", "XMR/USD", "LTC/USD",
-                "BTG/USD", "DSH/USD", "IOT/USD",
-                "XRP/USD", "NEO/USD", "ETH/USD", "BTC/USD"};
+            "QTM/USD", "OMG/USD", "EOS/USD",
+            "ETC/USD", "XMR/USD", "LTC/USD",
+            "BTG/USD", "DSH/USD", "IOT/USD",
+            "XRP/USD", "NEO/USD", "ETH/USD", "BTC/USD"};
 
     private static void parseHtmlDoc(int dataNamesSize, Stack<String> dataVal){
 

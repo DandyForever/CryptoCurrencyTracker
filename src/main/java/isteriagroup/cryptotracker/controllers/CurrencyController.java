@@ -1,5 +1,6 @@
 package isteriagroup.cryptotracker.controllers;
 
+import isteriagroup.cryptotracker.common.utils.ValidationException;
 import isteriagroup.cryptotracker.dtos.CurrencyDto;
 import isteriagroup.cryptotracker.services.CurrencyService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +19,7 @@ public class CurrencyController {
     }
 
     @GetMapping("/{currencyId}")
-    public CurrencyDto getCurrency(@PathVariable Long currencyId){
+    public CurrencyDto getCurrency(@PathVariable Long currencyId) throws ValidationException {
         return currencyService.getCurrency(currencyId);
     }
 

@@ -1,34 +1,30 @@
 package isteriagroup.cryptotracker.entities;
 
-
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
-@Embeddable
+@EqualsAndHashCode
 public class SubscriptionPK implements Serializable {
 
-    @Column(name = "USER_ID", insertable = false, updatable = false)
-    @NotNull
     @Getter
     @Setter
+    @Column(name = "USER_ID")
+    @NotNull
     private Long userId;
 
-    @Column(name = "CURRENCY_ID", insertable = false, updatable = false)
-    @NotNull
     @Getter
     @Setter
+    @Column (name = "CURRENCY_ID")
+    @NotNull
     private Long currencyId;
 
-    public SubscriptionPK(Long userId, Long currencyId) {
+    public SubscriptionPK (Long userId, Long currencyId){
         this.userId = userId;
         this.currencyId = currencyId;
-    }
-    
-    public SubscriptionPK() {
     }
 }
