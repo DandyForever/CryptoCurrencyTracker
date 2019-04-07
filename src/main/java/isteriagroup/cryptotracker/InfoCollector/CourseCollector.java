@@ -1,19 +1,26 @@
 package isteriagroup.cryptotracker.InfoCollector;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.net.*;
 import java.io.*;
 import java.util.Stack;
 
+@Component
 public class CourseCollector{
+    private static final Logger log = LoggerFactory.getLogger(CourseCollector.class);
+    private static final int fixedRate = 20000;
 
     private static String changes[];
     private static String values[];
     private static String dataNames[] = {"EDO/USD", "ETP/USD", "AVT/USD", "ZEC/USD",
-            "QTM/USD", "OMG/USD", "EOS/USD",
-            "ETC/USD", "XMR/USD", "LTC/USD",
-            "BTG/USD", "DSH/USD", "IOT/USD",
-            "XRP/USD", "NEO/USD", "ETH/USD", "BTC/USD"};
+        "QTM/USD", "OMG/USD", "EOS/USD",
+                "ETC/USD", "XMR/USD", "LTC/USD",
+                "BTG/USD", "DSH/USD", "IOT/USD",
+                "XRP/USD", "NEO/USD", "ETH/USD", "BTC/USD"};
 
     private static void parseHtmlDoc(int dataNamesSize, Stack<String> dataVal){
 
@@ -44,6 +51,7 @@ public class CourseCollector{
             e.printStackTrace();
         } finally {
             System.out.println(dataVal);
+            log.info("---Currency data has been gotten---");
         }
     }
 
@@ -67,14 +75,14 @@ public class CourseCollector{
         }
     }
 
-    private static void printGottenData(int dataNamesSize, String changes[], String values[], String dataNames[]){
+    /*private static void printGottenData(int dataNamesSize, String changes[], String values[], String dataNames[]){
 
         int i = 0;
 
         for (i = 0; i < dataNamesSize; i++) {
             System.out.println(dataNames[dataNamesSize - 1 - i] + " " + values[i] + " " + changes[i] + " ");
         }
-    }
+    }*/
 
 
     private static void replaceCommaByDot(String mass[]){
@@ -87,6 +95,7 @@ public class CourseCollector{
         }
     }
 
+    @Scheduled(fixedRate = fixedRate)
     public static void runCollector(){
         Stack<String> dataVal = new Stack<>();
 

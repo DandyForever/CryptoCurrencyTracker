@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import isteriagroup.cryptotracker.entities.SubscriptionPK;
 
 @RestController
-@RequestMapping("/subscription")
 public class SubscriptionController {
 
     private SubscriptionService subscriptionService;
@@ -19,9 +18,11 @@ public class SubscriptionController {
         this.subscriptionService = subscriptionService;
     }
 
-    @GetMapping("/{subscriptionPK}")
-    public SubscriptionDto getSubscription(@PathVariable SubscriptionPK subscriptionPK) throws ValidationException {
-        return subscriptionService.get(subscriptionPK);
+    @RequestMapping("/subscription")
+    public SubscriptionDto getSubscription(@RequestParam(value = "userId", required = false) Long userId,
+                                           @RequestParam(value = "currencyId", required = false) Long currencyId) throws ValidationException {
+        
+        return subscriptionService.get(new SubscriptionPK(userId, currencyId));
     }
 
     @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE)
