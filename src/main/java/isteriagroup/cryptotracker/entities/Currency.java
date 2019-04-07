@@ -13,14 +13,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "CURRENCIES")
-@ToString(exclude = "currencies")
+@ToString()
 @NoArgsConstructor
 public class Currency {
 
     @Id
-    @Column(name = "id")
+    @Column(name = "ID")
     @Getter
     @Setter
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "currency_seq_gen")
+    @SequenceGenerator(name = "currency_seq_gen", sequenceName = "currency_id_sequence", allocationSize = 1)
     private Long id;
 
     @Column(name = "NAME")
@@ -47,7 +49,8 @@ public class Currency {
     private List<Subscription> subscriptions;
 
 
-    public Currency(String name, BigDecimal curr_val, BigDecimal last_change, List<Subscription> subscriptions) {
+    public Currency(Long id, String name, BigDecimal curr_val, BigDecimal last_change, List<Subscription> subscriptions) {
+        this.id = id;
         this.name = name;
         this.curr_val = curr_val;
         this.last_change = last_change;

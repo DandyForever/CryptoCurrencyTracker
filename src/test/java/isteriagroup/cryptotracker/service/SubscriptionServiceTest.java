@@ -15,6 +15,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
@@ -40,11 +42,11 @@ public class SubscriptionServiceTest {
 
     @Test
     public void getTest() throws ValidationException{
-        Subscription subscription = new Subscription(new SubscriptionPK((long) 1, (long) 1), (float) 1);
+        Subscription subscription = new Subscription(new SubscriptionPK(1L, 1L), new BigDecimal(1));
         given(subscriptionDao.findOne(new SubscriptionPK(1L, 1L))).willReturn(subscription);
 
         SubscriptionDto actualSubscriptionDto = subscriptionService.get(new SubscriptionPK(1L, 1L));
-        SubscriptionDto expectedSubscriptionDto = new SubscriptionDto(new SubscriptionPK((long) 1, (long) 1), (float) 1);
+        SubscriptionDto expectedSubscriptionDto = new SubscriptionDto(new SubscriptionPK(1L, 1L), new BigDecimal(1));
 
         assertThat(actualSubscriptionDto).isEqualTo(expectedSubscriptionDto);
     }
@@ -56,16 +58,16 @@ public class SubscriptionServiceTest {
 
     @Test(expected = ValidationException.class)
     public void nullIdCreateTest() throws ValidationException{
-        subscriptionService.create(new SubscriptionDto(new SubscriptionPK((long) 1, (long) 1), (float) 1));
+        subscriptionService.create(new SubscriptionDto(null, new BigDecimal(1)));
     }
 
     @Test
     public void сreateTest() throws ValidationException{
-        SubscriptionDto subscriptionDto = new SubscriptionDto(new SubscriptionPK((long) 1, (long) 1), (float) 1);
+        SubscriptionDto subscriptionDto = new SubscriptionDto(new SubscriptionPK(1L, 1L), new BigDecimal(1));
 
         Subscription actualSubscription = subscriptionService.create(subscriptionDto);
 
-        Subscription expectedSubscription = new Subscription(new SubscriptionPK((long) 1, (long) 1), (float) 1);
+        Subscription expectedSubscription = new Subscription(new SubscriptionPK(1L, 1L), new BigDecimal(1));
 
         assertThat(actualSubscription).isEqualTo(expectedSubscription);
     }

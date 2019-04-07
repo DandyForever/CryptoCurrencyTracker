@@ -1,3 +1,8 @@
+/*DROP TABLE currencies CASCADE;
+DROP TABLE currencies_days CASCADE;
+DROP TABLE users CASCADE;
+DROP TABLE subscriptions CASCADE;*/
+
 CREATE TABLE IF NOT EXISTS currencies(
   id BIGINT PRIMARY KEY,
   curr_val NUMERIC NOT NULL,
@@ -53,9 +58,3 @@ COMMENT ON TABLE subscriptions IS 'Linkage table between tables ''users'' and ''
 COMMENT ON COLUMN subscriptions.user_id IS 'User ID';
 COMMENT ON COLUMN subscriptions.currency_id IS 'Currency ID';
 COMMENT ON COLUMN subscriptions.user_val IS 'User value of money';
-
-
-
-
-
-

@@ -12,8 +12,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import isteriagroup.cryptotracker.common.utils.ValidationException;
-
 import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
