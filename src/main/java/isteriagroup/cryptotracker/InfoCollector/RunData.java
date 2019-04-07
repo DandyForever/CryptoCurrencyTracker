@@ -1,14 +1,10 @@
 package isteriagroup.cryptotracker.InfoCollector;
 
-import isteriagroup.cryptotracker.CryptotrackerApplication;
 import isteriagroup.cryptotracker.entities.Currency;
 import isteriagroup.cryptotracker.daos.CurrencyDao;
 
-import lombok.NoArgsConstructor;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,13 +12,18 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 
 @Component
-@NoArgsConstructor
 public class RunData{
 
-    private static final Logger log = LoggerFactory.getLogger(CryptotrackerApplication.class);
+    private static final Logger log = LoggerFactory.getLogger(RunData.class);
+    private final int fixedRate = 21000;
 
-    @Bean
-    public CommandLineRunner insertCurrencies(CurrencyDao currencyDao) {
+    private final CurrencyDao currencyDao;
+
+    public RunData(CurrencyDao currencyDao) {
+        this.currencyDao = currencyDao;
+    }
+
+    private void insertCurrencies() {
 
         CourseCollector.runCollector();
 
@@ -33,19 +34,20 @@ public class RunData{
 
         Currency currencies[] = new Currency[quantityCurrency];
         int iter = 0;
-        for (iter = 0; iter < quantityCurrency; iter++){
+        for (iter = 0; iter < quantityCurrency; iter++) {
             currencies[iter] = new Currency((long) iter, dataNames[iter], new BigDecimal(values[iter]), new BigDecimal(changes[iter]));
         }
 
+        int i;
+        for (i = 0; i < quantityCurrency; i++) {
+            currencyDao.save(currencies[i]);
+        }
 
-        return args -> {
+        log.info("---Currency data has been initialized---");
+    }
 
-            int i;
-            for (i = 0; i < quantityCurrency; i++){
-                currencyDao.save(currencies[i]);
-            }
-
-            log.info("-----------------------Currency data has been initialized-----------------------");
-        };
+    @Scheduled(fixedRate = fixedRate)
+    private void initData(){
+        insertCurrencies();
     }
 }
