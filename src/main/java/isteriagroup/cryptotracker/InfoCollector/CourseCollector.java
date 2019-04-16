@@ -65,12 +65,27 @@ public class CourseCollector{
         for (i = 0; i < dataSize; i++) {
             if (i % 2 == 0) {
                 tmp = i / 2;
-                changes[tmp] = dataVal.pop();
+                String change = dataVal.pop();
+                if (change.lastIndexOf("—") != -1){
+                    changes[tmp] = "0.0";
+                }
+
+                else{
+                    changes[tmp] = change;
+                }
             }
 
             if (i % 2 == 1) {
                 tmp = (i - 1) / 2;
-                values[tmp] = dataVal.pop();
+                String val = dataVal.pop();
+
+                if (val.lastIndexOf("—") != -1){
+                    values[tmp] = "0.0";
+                }
+
+                else{
+                    values[tmp] = val;
+                }
             }
         }
     }
