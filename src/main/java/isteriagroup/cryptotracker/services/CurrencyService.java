@@ -8,6 +8,9 @@ import isteriagroup.cryptotracker.dtos.CurrencyDto;
 import isteriagroup.cryptotracker.entities.Currency;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static isteriagroup.cryptotracker.dtos.CurrencyDto.buildCurrencyDtoFromCurrency;
 
 
@@ -26,6 +29,22 @@ public class CurrencyService {
         ValidationUtils.validateIsNotNull(currency, "No currency with Id " + currencyId);
 
         return buildCurrencyDtoFromCurrency(currency);
+    }
+
+    public List<CurrencyDto> getAll() {
+        return currencyDao.findAllBy().stream()
+                .map(this::buildCurrencyDto)
+                .collect(Collectors.toList());
+    }
+
+    private CurrencyDto buildCurrencyDto(Currency currency) {
+        CurrencyDto currencyDto = new CurrencyDto();
+        currencyDto.setId(currency.getId());
+        currencyDto.setName(currency.getName());
+        currencyDto.setCurrVal(currency.getCurr_val());
+        currencyDto.setLastChange(currency.getLast_change());
+
+        return currencyDto;
     }
 
 
