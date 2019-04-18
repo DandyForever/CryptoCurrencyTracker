@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 import static isteriagroup.cryptotracker.common.utils.ValidationUtils.validateIsNotNull;
 import static isteriagroup.cryptotracker.common.utils.ValidationUtils.validateIsNull;
 
@@ -54,5 +56,18 @@ public class SubscriptionService {
         subscription.setUserVal(subscriptionDto.getUserVal());
 
         return subscription;
+    }
+
+    public void createSubscription(Long currencyId) throws ValidationException {
+
+//        log.info("Post" + currencyId);
+        Long userId = 1L;
+
+        validateIsNotNull(currencyId, "No currencyId provided");
+
+
+        Subscription newSubscription = new Subscription(new SubscriptionPK(userId, currencyId), new BigDecimal(0));
+
+        subscriptionDao.save(newSubscription);
     }
 }

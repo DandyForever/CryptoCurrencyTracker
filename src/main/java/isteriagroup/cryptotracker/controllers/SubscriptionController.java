@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import isteriagroup.cryptotracker.entities.SubscriptionPK;
 
 @RestController
+@RequestMapping("/subscriptions")
 public class SubscriptionController {
 
     private SubscriptionService subscriptionService;
@@ -28,5 +29,10 @@ public class SubscriptionController {
     @PostMapping(value = "create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public void createSubscription(SubscriptionDto subscriptionDto) throws ValidationException {
         subscriptionService.create(subscriptionDto);
+    }
+
+    @PostMapping(value = "create_subscription")
+    public void createSubscription(@RequestParam("currencyId") Long currencyId) throws ValidationException {
+        subscriptionService.createSubscription(currencyId);
     }
 }

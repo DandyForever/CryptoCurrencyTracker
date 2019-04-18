@@ -1,6 +1,7 @@
 package isteriagroup.cryptotracker.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "USERS")
 @ToString
+@NoArgsConstructor
 public class User {
 
     @Id
