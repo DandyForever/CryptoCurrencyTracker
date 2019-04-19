@@ -16,6 +16,10 @@ COMMENT ON COLUMN currencies.curr_val IS 'Course in USD up to day';
 COMMENT ON COLUMN currencies.last_change IS 'Last course change in USD';
 COMMENT ON COLUMN currencies.name IS 'CurrencyName';
 
+CREATE SEQUENCE IF NOT EXISTS currency_id_sequence START WITH 1 MINVALUE 1 INCREMENT BY 1;
+COMMENT ON SEQUENCE user_id_sequence IS 'Sequence for ID of table ''users''';
+
+
 CREATE TABLE IF NOT EXISTS currencies_days(
   currency_id BIGINT REFERENCES currencies(id),
   curr_date TIMESTAMP,
@@ -43,8 +47,8 @@ COMMENT ON COLUMN users.name IS 'Username';
 COMMENT ON COLUMN users.password_hash IS 'User''s password hash';
 COMMENT ON COLUMN users.password_salt IS 'A salt to calculate a password hash';
 
-CREATE SEQUENCE IF NOT EXISTS user_id_sequence START WITH 1 MINVALUE 1 INCREMENT BY 1;
-COMMENT ON SEQUENCE user_id_sequence IS 'Sequence for ID of table ''users''';
+CREATE SEQUENCE IF NOT EXISTS currency_id_sequence START WITH 1 MINVALUE 1 INCREMENT BY 1;
+COMMENT ON SEQUENCE currency_id_sequence IS 'Sequence for ID of table ''users''';
 
 
 CREATE TABLE IF NOT EXISTS subscriptions (
