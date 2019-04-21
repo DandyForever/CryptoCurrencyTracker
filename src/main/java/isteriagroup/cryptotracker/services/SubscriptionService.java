@@ -3,18 +3,24 @@ package isteriagroup.cryptotracker.services;
 
 import isteriagroup.cryptotracker.common.utils.ValidationException;
 import isteriagroup.cryptotracker.daos.SubscriptionDao;
+import isteriagroup.cryptotracker.dtos.CurrencyDto;
 import isteriagroup.cryptotracker.dtos.SubscriptionDto;
+import isteriagroup.cryptotracker.dtos.post.SubscriptionPostDto;
 import isteriagroup.cryptotracker.entities.Subscription;
 import isteriagroup.cryptotracker.entities.SubscriptionPK;
+
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static isteriagroup.cryptotracker.common.utils.ValidationUtils.validateIsNotNull;
-import static isteriagroup.cryptotracker.common.utils.ValidationUtils.validateIsNull;
+import static isteriagroup.cryptotracker.dtos.CurrencyDto.buildCurrencyDtoFromCurrency;
+
 
 
 @Service
@@ -35,9 +41,10 @@ public class SubscriptionService {
     }
 
     private SubscriptionDto buildSubscriptionDtoFromSubscription(Subscription subscription){
-        return new SubscriptionDto(subscription.getSubscriptionPK(),
-                subscription.getUserVal());
+            CurrencyDto currencyDto = buildCurrencyDtoFromCurrency(subscription.getCurrency());
 
+            return new SubscriptionDto(subscription.getSubscriptionPK(),
+                    subscription.getUserVal(), currencyDto);
     }
 
     public Subscription create(SubscriptionDto subscriptionDto) throws ValidationException{
@@ -70,4 +77,20 @@ public class SubscriptionService {
 
         subscriptionDao.save(newSubscription);
     }
+
+    public List<SubscriptionDto> getAll() {
+        return subscriptionDao.findAllBy().stream()
+                .map(this::buildSubscriptionDtoFromSubscription)
+                .collect(Collectors.toList());
+    }
+
+    public void deleteSubscription(SubscriptionPostDto subscriptionPostDto) throws ValidationException{
+        validateIsNotNull(subscriptionPostDto, "No subscriptionPostDto provided");
+
+        SubscriptionPK subscriptionPK = new SubscriptionPK(subscriptionPostDto.getUserId(),
+                subscriptionPostDto.getCurrencyId());
+
+        subscriptionDao.delete(subscriptionPK);
+    }
+
 }
