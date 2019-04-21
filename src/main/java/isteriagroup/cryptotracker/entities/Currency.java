@@ -13,16 +13,14 @@ import java.util.List;
 
 @Entity
 @Table(name = "CURRENCIES")
-@ToString()
+@ToString(exclude = "currencies")
 @NoArgsConstructor
 public class Currency {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "id")
     @Getter
     @Setter
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "currency_seq_gen")
-    @SequenceGenerator(name = "currency_seq_gen", sequenceName = "currency_id_sequence", allocationSize = 1)
     private Long id;
 
     @Column(name = "NAME")
@@ -31,15 +29,15 @@ public class Currency {
     @Setter
     private String name;
 
-    @Column(name = "CURR_VAL")
+    @Column(name = "currVal")
     @Getter
     @Setter
-    private BigDecimal curr_val;
+    private BigDecimal currVal;
 
-    @Column(name = "LAST_CHANGE")
+    @Column(name = "lastChange")
     @Getter
     @Setter
-    private BigDecimal last_change;
+    private BigDecimal lastChange;
 
     @OneToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE},
@@ -49,19 +47,18 @@ public class Currency {
     private List<Subscription> subscriptions;
 
 
-    public Currency(Long id, String name, BigDecimal curr_val, BigDecimal last_change, List<Subscription> subscriptions) {
-        this.id = id;
+    public Currency(String name, BigDecimal currVal, BigDecimal lastChange, List<Subscription> subscriptions) {
         this.name = name;
-        this.curr_val = curr_val;
-        this.last_change = last_change;
+        this.currVal = currVal;
+        this.lastChange = lastChange;
         this.subscriptions = subscriptions;
     }
 
-    public Currency(Long id, String name, BigDecimal curr_val, BigDecimal last_change) {
+    public Currency(Long id, String name, BigDecimal currVal, BigDecimal lastChange) {
         this.id = id;
         this.name = name;
-        this.curr_val = curr_val;
-        this.last_change = last_change;
+        this.currVal = currVal;
+        this.lastChange = lastChange;
     }
 
 }

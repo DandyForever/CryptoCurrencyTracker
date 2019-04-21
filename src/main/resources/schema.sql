@@ -1,13 +1,14 @@
+
 /*DROP TABLE currencies CASCADE;
 DROP TABLE currencies_days CASCADE;
 DROP TABLE users CASCADE;
 DROP TABLE subscriptions CASCADE;*/
 
 CREATE TABLE IF NOT EXISTS currencies(
-  id BIGINT PRIMARY KEY,
-  curr_val NUMERIC NOT NULL,
-  last_change NUMERIC NOT NULL,
-  name VARCHAR(100) NOT NULL
+    id BIGINT PRIMARY KEY,
+    curr_val NUMERIC NOT NULL,
+    last_change NUMERIC NOT NULL,
+    name VARCHAR(100) NOT NULL
 );
 
 COMMENT ON TABLE currencies IS 'Table contains the currencies'' data';
@@ -21,10 +22,10 @@ COMMENT ON SEQUENCE user_id_sequence IS 'Sequence for ID of table ''users''';
 
 
 CREATE TABLE IF NOT EXISTS currencies_days(
-  currency_id BIGINT REFERENCES currencies(id),
-  curr_date TIMESTAMP,
-  CONSTRAINT currency_day_pk PRIMARY KEY(currency_id, curr_date),
-  aver_day NUMERIC
+    currency_id BIGINT REFERENCES currencies(id),
+    curr_date TIMESTAMP,
+    CONSTRAINT currency_day_pk PRIMARY KEY(currency_id, curr_date),
+    aver_day NUMERIC
 );
 
 COMMENT ON TABLE currencies_days IS 'Linkage table between  ''users'' and datetime ';
@@ -33,11 +34,11 @@ COMMENT ON COLUMN currencies_days.currency_id IS 'Currency ID';
 COMMENT ON COLUMN currencies_days.aver_day IS 'Average course in USD up to day';
 
 CREATE TABLE IF NOT EXISTS users (
-  id BIGINT PRIMARY KEY,
-  email VARCHAR(100) UNIQUE NOT NULL,
-  name VARCHAR(100) UNIQUE NOT NULL,
-  password_hash VARCHAR(255),
-  password_salt VARCHAR(32)
+      id BIGINT PRIMARY KEY,
+      email VARCHAR(100) UNIQUE NOT NULL,
+      name VARCHAR(100) UNIQUE NOT NULL,
+      password_hash VARCHAR(255),
+      password_salt VARCHAR(32)
 );
 
 COMMENT ON TABLE users IS 'Table contains the users'' data';
@@ -50,12 +51,11 @@ COMMENT ON COLUMN users.password_salt IS 'A salt to calculate a password hash';
 CREATE SEQUENCE IF NOT EXISTS currency_id_sequence START WITH 1 MINVALUE 1 INCREMENT BY 1;
 COMMENT ON SEQUENCE currency_id_sequence IS 'Sequence for ID of table ''users''';
 
-
 CREATE TABLE IF NOT EXISTS subscriptions (
-  user_id BIGINT REFERENCES users(id),
-  currency_id BIGINT REFERENCES currencies(id),
-  user_val NUMERIC,
-  CONSTRAINT user_currency_pk PRIMARY KEY (user_id, currency_id)
+    user_id BIGINT REFERENCES users(id),
+    currency_id BIGINT REFERENCES currencies(id),
+    user_val NUMERIC,
+    CONSTRAINT user_currency_pk PRIMARY KEY (user_id, currency_id)
 );
 
 COMMENT ON TABLE subscriptions IS 'Linkage table between tables ''users'' and ''currencies'' ';

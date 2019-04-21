@@ -12,7 +12,7 @@ import java.util.Stack;
 @Component
 public class CourseCollector{
     private static final Logger log = LoggerFactory.getLogger(CourseCollector.class);
-    private static final int fixedRate = 20000;
+    private static final int fixedRate = 40000;
 
     private static String changes[];
     private static String values[];

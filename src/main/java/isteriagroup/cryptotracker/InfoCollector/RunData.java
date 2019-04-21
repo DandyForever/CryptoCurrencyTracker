@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class RunData{
 
     private static final Logger log = LoggerFactory.getLogger(RunData.class);
-    private final int fixedRate = 21000;
+    private final int fixedRate = 41000;
 
     private final CurrencyDao currencyDao;
 

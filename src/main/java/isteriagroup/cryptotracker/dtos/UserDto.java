@@ -1,10 +1,7 @@
 package isteriagroup.cryptotracker.dtos;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import isteriagroup.cryptotracker.entities.Subscription;
 import lombok.*;
-
-import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
@@ -24,14 +21,9 @@ public class UserDto {
     @Setter
     private String name;
 
-    @Getter
-    @Setter
-    private List<SubscriptionDto> subscriptions;
-
-    public UserDto(Long id, String email, String name, List<SubscriptionDto> subscriptions) {
+    public UserDto(Long id, String email, String name) {
         this.id = id;
         this.email = email;
         this.name = name;
-        this.subscriptions = subscriptions;
     }
 }

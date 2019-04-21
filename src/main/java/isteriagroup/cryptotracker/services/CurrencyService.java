@@ -41,8 +41,8 @@ public class CurrencyService {
         CurrencyDto currencyDto = new CurrencyDto();
         currencyDto.setId(currency.getId());
         currencyDto.setName(currency.getName());
-        currencyDto.setCurrVal(currency.getCurr_val());
-        currencyDto.setLastChange(currency.getLast_change());
+        currencyDto.setCurrVal(currency.getCurrVal());
+        currencyDto.setLastChange(currency.getLastChange());
 
         return currencyDto;
     }
