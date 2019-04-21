@@ -29,4 +29,11 @@ public class SubscriptionDto {
         this.subscriptionPK = subscriptionPK;
         this.userVal = userVal;
     }
+
+    public SubscriptionDto(SubscriptionPK subscriptionPK, BigDecimal userVal, CurrencyDto currencyDto){
+        this.subscriptionPK = subscriptionPK;
+        this.userVal= userVal;
+        this.currencyDto = currencyDto;
+
+    }
 }
