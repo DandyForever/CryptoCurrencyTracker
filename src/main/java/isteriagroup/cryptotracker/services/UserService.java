@@ -1,8 +1,5 @@
 package isteriagroup.cryptotracker.services;
 
-import isteriagroup.cryptotracker.common.utils.ValidationException;
-import isteriagroup.cryptotracker.common.utils.ValidationUtils;
-
 
 import isteriagroup.cryptotracker.daos.UserDao;
 import isteriagroup.cryptotracker.dtos.UserDto;
@@ -18,12 +15,8 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public UserDto getUser(Long userId) throws ValidationException {
-        ValidationUtils.validateIsNotNull(userId, "No user id provided");
-
+    public UserDto getUser(Long userId){
         User user = userDao.findOne(userId);
-        ValidationUtils.validateIsNotNull(user, "No user with id " + userId);
-
         return buildUserDtoFromUser(user);
     }
 
@@ -36,12 +29,8 @@ public class UserService {
         return userDto;
     }
 
-    public UserDto getUserByEmail(String userEmail) throws ValidationException{
-        ValidationUtils.validateIsNotNull(userEmail, "No user email provided");
-
+    public UserDto getUserByEmail(String userEmail){
         User user = userDao.findByEmail(userEmail);
-        ValidationUtils.validateIsNotNull(user, "No user with email" + userEmail);
-
         return buildUserDtoFromUser(user);
     }
 }

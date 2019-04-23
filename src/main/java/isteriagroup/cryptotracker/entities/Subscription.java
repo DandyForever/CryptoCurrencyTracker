@@ -1,6 +1,9 @@
 package isteriagroup.cryptotracker.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -10,13 +13,12 @@ import java.math.BigDecimal;
 @Table(name = "SUBSCRIPTIONS")
 @ToString(exclude = {"user", "currency"})
 @NoArgsConstructor
-@EqualsAndHashCode
 public class Subscription{
 
     @EmbeddedId
     @Getter
     @Setter
-    private SubscriptionPK subscriptionPK;
+    private SubscriptionPK subscriptionPK = new SubscriptionPK();
 
     @Column(name = "USER_VAL")
     @Getter
@@ -40,4 +42,5 @@ public class Subscription{
         this.subscriptionPK = subscriptionPK;
         this.userVal = userVal;
     }
+
 }

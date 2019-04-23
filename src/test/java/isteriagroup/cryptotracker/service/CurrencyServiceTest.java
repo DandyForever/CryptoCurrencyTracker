@@ -47,18 +47,18 @@ public class CurrencyServiceTest {
     @Test
     public void getTest() throws ValidationException{
         Subscription subscription1 = new Subscription(new SubscriptionPK((long) 1, (long) 1), new BigDecimal(1));
-        Subscription subscription2 = new Subscription(new SubscriptionPK((long) 1, (long) 2), new BigDecimal(2));
+        Subscription subscription2 = new Subscription(new SubscriptionPK((long) 1, (long) 2), new BigDecimal(1));
         List<Subscription> subscriptions = new ArrayList<Subscription>();
         subscriptions.add(subscription1);
         subscriptions.add(subscription2);
-        Currency currency = new Currency((long) 1,"Bitcoin", new BigDecimal(100), new BigDecimal(5), subscriptions);
+        Currency currency = new Currency("Bitcoin", new BigDecimal(100), new BigDecimal(5), subscriptions);
 
         given(currencyDao.findOne(1L)).willReturn(currency);
 
         CurrencyDto actualCurrencyDto = currencyService.getCurrency(1L);
 
         SubscriptionDto subscriptionDto1 = new SubscriptionDto(new SubscriptionPK((long) 1, (long) 1), new BigDecimal(1));
-        SubscriptionDto subscriptionDto2 = new SubscriptionDto(new SubscriptionPK((long) 1, (long) 2), new BigDecimal(2));
+        SubscriptionDto subscriptionDto2 = new SubscriptionDto(new SubscriptionPK((long) 1, (long) 2), new BigDecimal(1));
         List <SubscriptionDto> subscriptionDtos = new ArrayList<>();
         subscriptionDtos.add(subscriptionDto1);
         subscriptionDtos.add(subscriptionDto2);
